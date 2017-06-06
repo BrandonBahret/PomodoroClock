@@ -1,0 +1,220 @@
+@background-working: #F44336;
+@background-break: #8BC34A;
+
+@color-primary: rgba(255,255,255, 0.97);
+@color-secondary: rgba(255,255,255, 0.70);
+@text-primary: rgba(255,255,255,0.95);
+
+@button-color: white;
+@shadow-black: rgba(0,0,0,0.15);
+@icon-color: #808080;
+
+body { background-color: @background-working; }
+
+.working {
+  transition: background 0.25s ease;
+  background-color: @background-working;
+}
+
+.break {
+  transition: background 0.25s ease;
+  background-color: @background-break;
+}
+
+.disabled { filter: opacity(65%); }
+*:disabled { .disabled; }
+
+.container {
+  width: 589px;
+  margin: 10% auto;
+}
+
+.switch {
+  @font-size: 25px;
+  @font-family: "Roboto Light", sans-serif;
+  
+  input {display:none;}
+
+  position: relative;
+  display: inline-block;
+  width: 250px;
+  height: 55px;
+ 
+  .slider {
+    cursor: pointer;
+    position: absolute;
+    left: 0; right: 0; top: 0; bottom: 0;
+    transition: .1s;
+
+    border: 2px white solid;
+    border-radius: 34px;
+    box-shadow: 0 0 10px rgba(0,0,0,.20) inset;
+    color: @icon-color;
+    font-size: @font-size;
+    font-family: @font-family;
+  }
+  
+  .slider:before {
+    position: absolute;
+    bottom: 6.5px;
+    right: 129px;
+    content: "Working";
+    padding: 4px 10px;
+    display:inline-block;
+
+    background-color: white;
+    transition: .1s;
+    border-radius: 30px;
+  }
+
+  input:checked + .slider:before {
+    box-shadow: 0 0 10px rgba(0,0,0,.20);
+    content: "Break";
+    right: 7px;
+  }
+
+  .other-option {
+    z-index: -1;
+    color: white;
+    font-size: @font-size;
+    font-family: @font-family;
+  }
+  
+  .slider:after {
+    .other-option;
+    content:'Break';
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 80%;
+  }
+
+  input:checked + .slider:after{
+    .other-option;
+    content:'Working';
+    top: 50%;
+    left: 25%;
+  }
+}
+
+button {
+  cursor: pointer;
+  cursor: hand;
+}
+button:active {
+  box-shadow: 0px 0px 9px rgba(0,0,0,0.16) !important;
+  filter: brightness(85%);
+}
+
+.round-button {
+  background-color: @button-color;
+  box-shadow: 0 1px 12px @shadow-black;
+  
+  outline: none !important;
+  border: none;
+
+  font-size: 22px;
+  color: @icon-color; 
+  border-radius: 200px;
+}
+
+.clock-wall {
+  @length: 300px;
+  width: @length;
+  height: @length;
+
+  display: inline-block;
+  border: 17px @color-primary solid;
+  border-radius: 200px;
+  box-shadow: 0 0 200px rgba(0,0,0,1) inset;
+  box-shadow: inset 0 0 20px @shadow-black,
+    0 0 20px @shadow-black;
+}
+
+.clock-content{
+  margin-top: 12%;
+  
+  #clock-title {
+    font-family: "Roboto Thin", sans-serif;
+    font-size: 26px;
+    text-align: center;
+    color: @color-primary;
+  }
+  
+  .clock-display-text {
+    display: inline-block;
+    font-family: "Roboto Thin", sans-serif;
+    color: @text-primary;
+  }
+  
+  #clock-display-min {
+    .clock-display-text;
+    font-size: 100px;
+  }
+  
+  #clock-display-sec {
+    .clock-display-text;
+    font-size: 50px;
+    position: relative;
+    bottom: 34px;
+  }
+  
+  #clock-stop-button {
+    display: none;
+  }
+  
+  .clock-button {
+    .round-button;
+    position: relative;
+    @length: 55px;
+    width: @length;
+    height: @length;
+    margin: 15px 7px;
+  }
+}
+
+.time-settings {
+  display: inline-block;
+
+  .time-setting-element {
+    *{display: inline-block;}
+    
+    .time-setting-title {
+      display: block;
+      text-align: center;
+      font-family: "Roboto Thin", sans-serif;
+      font-size: 30px;
+      color: @text-primary;
+      margin: 10px auto;
+    } 
+    
+    .time-setting-value {
+      font-family: "Roboto Light", sans-serif;
+      font-size: 25px;
+      text-align: center;
+      vertical-align: middle;
+      color: @text-primary;
+      margin: 0;
+    }
+    
+    button {
+      .round-button;
+      @length: 40px;
+      width: @length;
+      height: @length;
+      font-size: 18px;
+      margin: 0 12px;
+    }
+  }
+}
+
+@media only screen and (max-width: 630px) {
+  .container {
+    width: 340px;
+    margin: 10% auto;
+  }
+  
+  .time-settings {
+    margin: 25px 0 30px 50px;
+  }
+}
